@@ -1,0 +1,146 @@
+<form class="mt-4" name="formS" method="post" action="/video/deletes/?_method=DELETE">
+    <table class="table">
+    <thead>
+    <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Tên Video  
+          {{{sortlist 'tenvideo' _sort}}}
+        </th>
+        <th scope="col">Tên Kênh</th>
+        <th scope="col">Video Id</th>
+        <th scope="col">Ghi Chú</th>
+        <th scope="col">Thời Gian Đăng</th>
+        <th scope="col">
+            <div class="form-check ">
+              <input class="form-check-input" type="checkbox" value="" id="checkAll">
+              <label class="form-check-label" for="checkAll">
+                Tất Cả
+              </label>
+            </div>
+
+            {{!-- <div class="form-group col-md-4">
+              <select id="inputState" class="form-control" required>
+                <option value="">Chọn</option>
+                <option value="xoa">Xóa</option>
+              </select>
+            </div> --}}
+            <button class="btn btn-primary btn-sm  btn-xoa-tat" disabled >Xóa Tất Cả</button>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each videos}}
+    <tr>
+        <th scope="row">{{sum @index 1}}</th>
+        <td>{{this.tenvideo}}</td>
+        <td>{{this.tenkenh}}</td>
+        <td><a href="/video/{{this._id}}">{{this.videoid}}</a></td>
+        <td>{{this.ghichu}}</td>
+        <td>{{this.createdAt}}</td>
+        <td> 
+            <a href="/video/edit/{{this._id}}" class="btn btn-link">Sửa</a>
+            <a href="" data-id="{{this._id}}" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">Xóa</a>
+        </td>
+        <td>
+          <div class="form-check ">
+              <input class="form-check-input checkOL" type="checkbox" value="{{this._id}}" name="videoIds[]" id="defaultCheck1">
+            </div>
+        </td>
+    </tr>
+    {{else}}
+    <tr >
+      <td colspan="7" class="text-center">
+          Không Có Gì Hết</br>
+          Bấm <a href="/video/Create" style="color: red;" > VÀO ĐÂY </a> Để Thêm Video Của Bạn
+      </td>
+    </tr>
+{{/each}}
+</tbody>
+</table>
+</form>
+
+
+
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thông Báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có muốn xóa không</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-delete-video" class="btn btn-primary">OK</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<form action="" method="post" name="form-delete"></form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+
+    var id
+    var formDelete=document.forms['form-delete']
+    var formS=document.forms['formS']
+    var btnDelete=document.querySelector('#btn-delete-video')
+    var checkboxAll=$('#checkAll')
+    var checkOL = $('.checkOL')
+    var btnXTC = $('.btn-xoa-tat')
+
+
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) 
+        id = button.data('id') 
+        
+    })
+
+
+    btnDelete.onclick=function(){
+        formDelete.action='/video/delete/'+id+'?_method=DELETE'
+        formDelete.submit()
+    }
+
+    // checkbox all change
+    checkboxAll.change(function(){
+      var isCheck = $(this).prop('checked')
+      checkOL.prop('checked',isCheck)
+      btnSXoa()
+    })
+
+    // item checkbox change
+    checkOL.change(function(){
+      var isCheck = checkOL.length === $('input[name="videoIds[]"]:checked').length
+      checkboxAll.prop('checked',isCheck)
+      btnSXoa()
+    })
+
+    function btnSXoa(){
+      var checkBox = $('input[name="videoIds[]"]:checked').length
+      if(checkBox>0){
+        btnXTC.attr('disabled', false)
+      }
+      else{
+        btnXTC.attr('disabled',true)
+      }
+    }
+
+
+    
+
+
+
+
+})
+</script>

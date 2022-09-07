@@ -1,0 +1,27 @@
+<div class="mt-4">
+    <div class="row">
+        <div class="col-lg-8 video" id="exampleModal">
+            <iframe width="860"  height="480" src="https://www.youtube.com/embed/{{video.videoid}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <h5>{{video.tenvideo}}</h5>
+            <p>{{video.ghichu}}</p>
+            <h6>{{video.tenkenh}}</h6>
+        </div>
+
+
+
+
+        <div class="col-lg-4">
+            {{#each videos}}
+                <a href="/video/{{this._id}}">
+                    <div class="media mt-2">
+                        <img  src="https://img.youtube.com/vi/{{this.videoid}}/sddefault.jpg" class="align-self-start mr-3" style="width:170px; height:112px ;">
+                        <div class="media-body">
+                            <h6>{{this.tenvideo}}</h6>
+                            <p>{{this.tenkenh}}</p>
+                        </div>     
+                    </div>   
+                </a>   
+            {{/each}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{
+  "name": "youtobe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "watch": "node-sass --watch src/resources/scss --output src/public/css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@primer/octicons": "^17.5.0",
+    "bootstrap-icons": "^1.9.1",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "mdbootstrap": "^4.20.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.5.4",
+    "mongoose-delete": "^0.5.4"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "node-sass": "^7.0.1",
+    "nodemon": "^2.0.19"
+  }
+}

@@ -1,0 +1,22 @@
+<div class="mt-4">
+    <h1>Form Sửa Thông Tin Video</h1>
+    <form method="post" action="/video/update/{{video._id}}?_method=PUT">
+        <div class="form-group">
+            <label for="tenvideo">Tên Video</label>
+            <input type="text" class="form-control"  name="tenvideo" value="{{video.tenvideo}}">
+        </div>
+        <div class="form-group">
+            <label for="tenkenh">Tên Kênh</label>
+            <input type="text" class="form-control"  name="tenkenh" value="{{video.tenkenh}}">
+        </div>
+        <div class="form-group">
+            <label for="videoid">Video Id</label>
+            <input type="text" class="form-control"  name="videoid" value="{{video.videoid}}">
+        </div>
+        <div class="form-group">
+            <label for="ghichu">Ghi Chú</label>
+            <textarea class="form-control" name="ghichu">{{video.ghichu}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu Video</button>
+    </form>
+</div>
